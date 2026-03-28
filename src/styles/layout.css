@@ -1,0 +1,302 @@
+/* ============================================
+   DOCUMENT ROOT — prevent body-level scroll on iOS
+   ============================================ */
+html {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+body, #root {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* ============================================
+   GLOBAL LAYOUT
+   ============================================ */
+.app-container {
+  display: grid;
+  grid-template-columns: auto 1fr 320px;
+  grid-template-rows: 1fr;
+  gap: 24px;
+  padding: 32px;
+  padding-top: 8px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+  height: 100vh;
+  background-color: var(--app-bg);
+  overflow: hidden;
+}
+
+.app-container.no-inspector {
+  grid-template-columns: auto 1fr;
+}
+
+
+/* ============================================
+   LEFT COLUMN - SIDEBAR
+   ============================================ */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 64px;
+  flex-shrink: 0;
+  min-height: 0;
+  transition: width 220ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Island */
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 12px 8px;
+  overflow: hidden;
+}
+
+.left-column.expanded {
+  width: 200px;
+}
+
+/* ---- Toggle button ---- */
+.sidebar-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: var(--surface-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  margin-left: 6px;
+  transition: background 180ms ease, color 180ms ease, margin-left 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--app-bg);
+  color: var(--text-secondary);
+}
+
+.left-column.expanded .sidebar-toggle-btn {
+  margin-left: 148px;
+}
+
+/* ---- Nav items (rows inside the sidebar island) ---- */
+.sidebar-block {
+  border-radius: var(--radius-md);
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: background 160ms ease,
+              gap 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.left-column.expanded .sidebar-block {
+  gap: 10px;
+}
+
+.sidebar-block:hover {
+  background: var(--surface-secondary);
+}
+
+.sidebar-block.active {
+  background: var(--accent-blue-subtle);
+}
+
+.sidebar-block-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: color 200ms ease;
+}
+
+.sidebar-block.active .sidebar-block-icon {
+  color: var(--accent-blue);
+}
+
+.sidebar-block-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 140ms ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.left-column.expanded .sidebar-block-label {
+  max-width: 160px;
+  opacity: 1;
+  transition: max-width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 140ms ease 100ms;
+}
+
+.sidebar-block.active .sidebar-block-label {
+  color: var(--accent-blue);
+}
+
+.sidebar-block-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--accent-blue);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.sidebar-spacer {
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar-settings-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+  margin-top: auto;
+}
+
+.sidebar-settings-btn:hover {
+  background: var(--surface-secondary);
+}
+
+/* ============================================
+   CENTER COLUMN - MAIN CONTENT
+   ============================================ */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+/* View pane switching - no longer used with React Router */
+.view-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ============================================
+   RIGHT COLUMN - INSPECTOR
+   ============================================ */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.right-column.hidden {
+  display: none;
+}
+
+/* ============================================
+   MOBILE LAYOUT
+   ============================================ */
+.mobile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--app-bg);
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+}
+
+.mobile-content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-tab-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  background: var(--surface-primary);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-md);
+  padding: 6px 8px 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  gap: 4px;
+  height: calc(64px + env(safe-area-inset-bottom));
+}
+
+.mobile-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 6px 4px;
+  gap: 2px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.mobile-tab--active {
+  background: var(--accent-blue-subtle);
+}
+
+.mobile-tab__icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.mobile-tab--active .mobile-tab__icon {
+  color: var(--accent-blue);
+}
+
+.mobile-tab__label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  overflow: hidden;
+}
+
+.mobile-tab--active .mobile-tab__label {
+  color: var(--accent-blue);
+}

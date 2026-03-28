@@ -1,0 +1,89 @@
+/* driver-popover.gera-tour — the class is added TO the popover element,
+   not as a wrapper, so we need the compound selector (no space). */
+
+.driver-popover.gera-tour {
+  background: var(--surface-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22), 0 0 0 1px var(--surface-secondary) !important;
+  font-family: inherit !important;
+  padding: 22px 22px 18px !important;
+  min-width: 270px !important;
+  max-width: 340px !important;
+}
+
+.driver-popover.gera-tour * {
+  font-family: inherit !important;
+}
+
+.driver-popover.gera-tour .driver-popover-title {
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: var(--text-primary) !important;
+  margin-bottom: 6px !important;
+}
+
+.driver-popover.gera-tour .driver-popover-description {
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.55 !important;
+}
+
+.driver-popover.gera-tour .driver-popover-progress-text {
+  font-size: 11px !important;
+  color: var(--text-tertiary) !important;
+}
+
+.driver-popover.gera-tour .driver-popover-footer {
+  margin-top: 16px !important;
+  gap: 6px !important;
+}
+
+.driver-popover.gera-tour .driver-popover-next-btn {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 7px 14px !important;
+  cursor: pointer !important;
+  text-shadow: none !important;
+}
+
+.driver-popover.gera-tour .driver-popover-next-btn:hover {
+  opacity: 0.9 !important;
+}
+
+.driver-popover.gera-tour .driver-popover-prev-btn {
+  background: var(--surface-secondary) !important;
+  color: var(--text-secondary) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 7px 14px !important;
+  cursor: pointer !important;
+  text-shadow: none !important;
+}
+
+.driver-popover.gera-tour .driver-popover-prev-btn:hover {
+  background: var(--surface-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.driver-popover.gera-tour .driver-popover-close-btn {
+  color: var(--text-tertiary) !important;
+  font-size: 18px !important;
+}
+
+.driver-popover.gera-tour .driver-popover-close-btn:hover,
+.driver-popover.gera-tour .driver-popover-close-btn:focus {
+  color: var(--text-primary) !important;
+}
+
+/* Arrow — match popover background so it blends */
+.driver-popover.gera-tour .driver-popover-arrow-side-left  { border-right-color:  var(--surface-primary) !important; }
+.driver-popover.gera-tour .driver-popover-arrow-side-right { border-left-color:   var(--surface-primary) !important; }
+.driver-popover.gera-tour .driver-popover-arrow-side-top   { border-bottom-color: var(--surface-primary) !important; }
+.driver-popover.gera-tour .driver-popover-arrow-side-bottom{ border-top-color:    var(--surface-primary) !important; }

@@ -1,0 +1,4 @@
+.plain-text-editor .cm-content ::selection,
+.plain-text-editor .cm-content *::selection {
+  background: rgba(59, 130, 246, 0.35);
+}
