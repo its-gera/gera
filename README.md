@@ -51,14 +51,14 @@ Miscellaneous UI improvements and bugfixes can be expected in early future.
 
 Major milestones planned for the project:
 
-- [x] Packaging Gera for humans (brew, choco, installers) - __0.0.1__
-- [x] Dark mode - __0.0.3__
-- [x] Keybindings (customizable) - __0.0.4__
-- [x] Plain-text note editor - __0.0.7__
+- [ ] Mobile app
+  - [ ] iOS
+  - [ ] Android
+- [ ] P2P sync between mobile apps and desktop apps
+- [ ] Documentation
 - [ ] Syncing calendar event changes back to the source calendar
 - [ ] Scriptability or plugin system
 - [ ] Sync for Outlook calendar
 - [ ] Localization
 - [ ] Update distribution
-- [ ] Mobile app
-- [ ] P2P sync between mobile apps and desktop apps
+
