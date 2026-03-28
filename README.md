@@ -8,10 +8,6 @@
 
 Gera is a unified workspace that connects your schedule, tasks, and knowledge. It organizes your work locally without restricting your data to proprietary formats or cloud subscriptions.
 
-<p align="center">
-  <img src="public/gera.png"/>
-</p>
-
 ## Core Concepts
 
 Gera separates your information into three distinct categories:
