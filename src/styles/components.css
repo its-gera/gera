@@ -271,6 +271,7 @@
   flex-direction: column;
   gap: 6px;
   margin-top: 12px;
+  width: 100%;
 }
 
 .task-modal-events-label {
@@ -295,6 +296,83 @@
   font-style: italic;
 }
 
+.task-modal-due-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.task-modal-due-toggle {
+  display: flex;
+  background: var(--surface-secondary);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.task-modal-due-toggle-btn {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  white-space: nowrap;
+}
+
+.task-modal-due-toggle-btn--active {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.task-modal-due-toggle-btn:not(.task-modal-due-toggle-btn--active):hover {
+  background: var(--surface-tertiary);
+}
+
+.task-modal-rel-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-modal-rel-event-btn {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--surface-tertiary);
+  background: var(--surface-secondary);
+  color: var(--text-tertiary);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.task-modal-rel-event-btn--selected {
+  color: var(--text-primary);
+}
+
+.task-modal-rel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.task-modal-rel-amount {
+  width: 60px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--surface-tertiary);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font-size: 13px;
+  text-align: center;
+}
+
 .metadata-chip--readonly {
   opacity: 0.65;
   cursor: default;
@@ -315,6 +393,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
+  min-width: 0;
 }
 
 .event-modal-label {
@@ -329,6 +409,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.event-modal-time-row--mobile {
+  grid-template-columns: 1fr;
 }
 
 

@@ -6,6 +6,12 @@ import { TrashIcon } from '../icons/Icons';
 import { ConfirmDialog } from '../shared/ConfirmDialog';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { DateTimePicker } from '../shared/DateTimePicker';
+import { isMobilePlatform } from '../../utils/platform';
+import { useSheetGesture } from '../../hooks/useSheetGesture';
+import { formatEventDate, formatEventTime } from '../../utils/dateFormatting';
+import { CalendarIcon } from '../icons/Icons';
+
+const mobile = isMobilePlatform();
 
 interface EventEditModalProps {
   event: EventEntity;
@@ -38,6 +44,9 @@ export function EventEditModal({ event, onClose }: EventEditModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
 
+  const { dismissing, dismiss, handleTouchStart, handleTouchMove, handleTouchEnd, panelStyle } =
+    useSheetGesture(onClose, panelRef);
+
   useFocusTrap(panelRef);
 
   // Focus name input on open
@@ -46,17 +55,17 @@ export function EventEditModal({ event, onClose }: EventEditModalProps) {
   }, []);
 
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') dismiss(); };
     document.addEventListener('keydown', handler);
     return () => document.removeEventListener('keydown', handler);
-  }, [onClose]);
+  }, [dismiss]);
 
   const handleSingleLineKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') { e.preventDefault(); handleSave(); }
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === backdropRef.current) onClose();
+    if (e.target === backdropRef.current) dismiss();
   };
 
   const addParticipant = () => {
@@ -115,11 +124,20 @@ export function EventEditModal({ event, onClose }: EventEditModalProps) {
 
   return createPortal(
     <div
-      className="modal-backdrop"
+      className={`modal-backdrop${dismissing ? ' modal-backdrop--dismissing' : ''}`}
       ref={backdropRef}
       onClick={handleBackdropClick}
     >
-      <div className="modal-panel event-edit-modal" role="dialog" aria-modal="true" ref={panelRef}>
+      <div
+        className={`modal-panel event-edit-modal${dismissing ? ' modal-panel--dismissing' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        ref={panelRef}
+        style={panelStyle}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {/* Header */}
         <div className="modal-header">
           <h2 className="modal-title">Edit Event</h2>
@@ -147,14 +165,36 @@ export function EventEditModal({ event, onClose }: EventEditModalProps) {
         </div>
 
         {/* Time row */}
-        <div className="event-modal-time-row">
+        <div className={`event-modal-time-row${mobile ? ' event-modal-time-row--mobile' : ''}`}>
           <div className="event-modal-field">
             <label className="event-modal-label">Start</label>
-            <DateTimePicker value={fromVal} onChange={setFromVal} />
+            {mobile ? (
+              <div style={{ position: 'relative' }}>
+                <div className="mobile-sheet-date-row" style={{ pointerEvents: 'none' }}>
+                  <CalendarIcon />
+                  <span className="mobile-sheet-row__value">
+                    {fromVal ? `${formatEventDate(fromVal)} ${formatEventTime(fromVal)}` : 'Select date…'}
+                  </span>
+                </div>
+                <input type="datetime-local" value={fromVal} onChange={(e) => setFromVal(e.target.value)}
+                  style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', zIndex: 1 }} />
+              </div>
+            ) : <DateTimePicker value={fromVal} onChange={setFromVal} />}
           </div>
           <div className="event-modal-field">
             <label className="event-modal-label">End</label>
-            <DateTimePicker value={toVal} onChange={setToVal} />
+            {mobile ? (
+              <div style={{ position: 'relative' }}>
+                <div className="mobile-sheet-date-row" style={{ pointerEvents: 'none' }}>
+                  <CalendarIcon />
+                  <span className="mobile-sheet-row__value">
+                    {toVal ? `${formatEventDate(toVal)} ${formatEventTime(toVal)}` : 'Select date…'}
+                  </span>
+                </div>
+                <input type="datetime-local" value={toVal} onChange={(e) => setToVal(e.target.value)}
+                  style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', zIndex: 1 }} />
+              </div>
+            ) : <DateTimePicker value={toVal} onChange={setToVal} />}
           </div>
         </div>
 
@@ -213,9 +253,6 @@ export function EventEditModal({ event, onClose }: EventEditModalProps) {
 
         {/* Actions */}
         <div className="modal-actions">
-          <button className="modal-btn modal-btn--cancel" onClick={onClose}>
-            Cancel
-          </button>
           <button
             className="modal-btn modal-btn--submit"
             disabled={!isValid || isSubmitting}

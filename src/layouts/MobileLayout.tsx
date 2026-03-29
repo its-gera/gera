@@ -1,22 +1,24 @@
+import { useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../stores/useAppStore";
-import { TasksView } from "../components/tasks/TasksView";
-import { CalendarView } from "../components/calendar/CalendarView";
-import { NotesView } from "../components/notes/NotesView";
-import { SettingsModal } from "../components/settings/SettingsModal";
+import { MobileTasksView } from "../components/mobile/MobileTasksView";
+import { MobileCalendarView } from "../components/mobile/MobileCalendarView";
+import { MobileNotesView } from "../components/mobile/MobileNotesView";
+import { MobileSettingsView } from "../components/mobile/MobileSettingsView";
 import { InboxIcon, CalendarIcon, DocumentIcon, CogIcon } from "../components/icons/Icons";
+import '../styles/mobile.css';
 
 function MobileTabBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1] || "tasks";
-  const setSettingsOpen = useAppStore((s) => s.setSettingsOpen);
 
   const tabs = [
     { id: "tasks",    label: "Tasks",    icon: <InboxIcon />,    path: "/tasks" },
     { id: "notes",    label: "Notes",    icon: <DocumentIcon />, path: "/notes" },
     { id: "calendar", label: "Calendar", icon: <CalendarIcon />, path: "/calendar" },
+    { id: "settings", label: "Settings", icon: <CogIcon />,      path: "/settings" },
   ] as const;
 
   return (
@@ -31,39 +33,34 @@ function MobileTabBar() {
           <span className="mobile-tab__label">{tab.label}</span>
         </button>
       ))}
-      <button
-        className="mobile-tab"
-        onClick={() => setSettingsOpen(true)}
-      >
-        <span className="mobile-tab__icon"><CogIcon /></span>
-        <span className="mobile-tab__label">Settings</span>
-      </button>
     </nav>
   );
 }
 
 function MobileShell() {
-  const settingsOpen = useAppStore((s) => s.settingsOpen);
-  const setSettingsOpen = useAppStore((s) => s.setSettingsOpen);
-
   return (
     <div className="mobile-container">
       <main className="mobile-content">
         <Routes>
           <Route path="/" element={<Navigate to="/tasks" replace />} />
-          <Route path="/tasks" element={<TasksView />} />
-          <Route path="/calendar" element={<CalendarView />} />
-          <Route path="/notes" element={<NotesView />} />
+          <Route path="/tasks" element={<MobileTasksView />} />
+          <Route path="/calendar" element={<MobileCalendarView />} />
+          <Route path="/notes" element={<MobileNotesView />} />
+          <Route path="/settings" element={<MobileSettingsView />} />
         </Routes>
       </main>
       <MobileTabBar />
-      <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );
 }
 
 export function MobileLayout() {
   const loading = useAppStore((s) => s.loading);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-mobile', 'true');
+    return () => document.documentElement.removeAttribute('data-mobile');
+  }, []);
 
   if (loading) {
     return (

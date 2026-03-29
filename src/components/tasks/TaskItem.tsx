@@ -187,6 +187,9 @@ export function TaskItem({ task, onNavigate, overdue }: TaskItemProps) {
           initialText={display}
           initialEventIds={[...ownEventIdsInText]}
           initialDeadline={task.deadline ? task.deadline.slice(0, 16) : ''}
+          initialTimeRef={task.time_references?.find(
+            (r) => r.modifier === 'before' || r.modifier === 'after'
+          )}
           inheritedEventIds={inheritedEventIds}
           onSave={(fullText) => updateTask(task.source_file, task.line_number, fullText)}
           onDelete={() => setConfirmDelete(true)}

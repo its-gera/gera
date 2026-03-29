@@ -59,6 +59,12 @@ export function TasksView({}: TasksViewProps) {
             >
               By Event
             </button>
+            <button
+              className={`tasks-view-toggle-btn${viewMode === 'unscheduled' ? ' active' : ''}`}
+              onClick={() => setViewMode('unscheduled')}
+            >
+              Unscheduled
+            </button>
           </div>
           <button
             className="icon-btn icon-btn--accent"

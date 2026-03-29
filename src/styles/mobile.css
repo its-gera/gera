@@ -1,0 +1,1582 @@
+/* ============================================================
+   MOBILE-SPECIFIC STYLES
+   Imported only by MobileLayout — never affects desktop.
+   ============================================================ */
+
+/* ── Root layout ─────────────────────────────────────────── */
+:root {
+  --mobile-tab-bar-height: 64px;
+  --mobile-fab-bottom: calc(var(--mobile-tab-bar-height) + env(safe-area-inset-bottom) + 16px);
+}
+
+.mobile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--app-bg);
+  overflow: hidden;
+}
+
+.mobile-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mobile-content > * {
+  height: 100%;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────── */
+.mobile-tab-bar {
+  display: flex;
+  background: var(--surface-primary);
+  border-top: 1px solid var(--surface-secondary);
+  padding-bottom: env(safe-area-inset-bottom);
+  height: calc(var(--mobile-tab-bar-height) + env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+
+.mobile-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 6px 0 4px;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-tab--active {
+  color: var(--accent-blue);
+}
+
+.mobile-tab__icon {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.mobile-tab__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+.mobile-page-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 14px 20px 12px;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--surface-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-page-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 28px;
+}
+
+.mobile-page-header__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.mobile-page-header__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-page-header__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Back button ─────────────────────────────────────────── */
+.mobile-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--accent-blue);
+  cursor: pointer;
+  padding: 0;
+}
+
+.mobile-back-btn:hover {
+  background: var(--surface-secondary);
+}
+
+/* ── Segmented control ───────────────────────────────────── */
+.mobile-seg-ctrl {
+  display: flex;
+  background: var(--surface-secondary);
+  border-radius: 9px;
+  padding: 2px;
+  width: 100%;
+}
+
+.mobile-seg-opt {
+  flex: 1;
+  text-align: center;
+  padding: 6px 4px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: background 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+
+.mobile-seg-opt--active {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.mobile-seg-opt:not(.mobile-seg-opt--active) {
+  color: var(--text-secondary);
+}
+
+/* ── Scrollable content area ─────────────────────────────── */
+.mobile-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Section labels ──────────────────────────────────────── */
+.mobile-section-label {
+  padding: 10px 20px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-section-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.mobile-section-count--overdue {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+/* ── Task rows ───────────────────────────────────────────── */
+.mobile-task-row {
+  padding: 12px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid var(--surface-secondary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-task-row:active {
+  background: var(--surface-secondary);
+}
+
+.mobile-task-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-task-row__text {
+  font-size: 15px;
+  font-weight: 450;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.mobile-task-row__text.completed {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.mobile-task-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.mobile-task-row__secondary {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.mobile-task-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mobile-task-tag--event {
+  background: var(--chip-event-bg);
+  color: var(--chip-event-text);
+}
+
+.mobile-task-tag--deadline {
+  background: var(--chip-deadline-bg);
+  color: var(--chip-deadline-text);
+}
+
+.mobile-task-tag--overdue {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+}
+
+.mobile-task-tag--project {
+  background: var(--chip-project-bg);
+  color: var(--chip-project-text);
+}
+
+/* ── FAB ─────────────────────────────────────────────────── */
+.mobile-fab {
+  position: fixed;
+  right: 20px;
+  bottom: var(--mobile-fab-bottom);
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--accent-blue);
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 30;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-fab:active {
+  transform: scale(0.95);
+}
+
+/* ── Bottom sheet ────────────────────────────────────────── */
+.mobile-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mobile-sheet {
+  background: var(--surface-primary);
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--surface-secondary);
+  min-height: 70vh;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--surface-secondary);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+.mobile-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.mobile-sheet-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mobile-sheet-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.mobile-sheet-field {
+  margin-bottom: 16px;
+}
+
+.mobile-sheet-input {
+  background: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text-primary);
+  width: 100%;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.mobile-sheet-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.mobile-sheet-row {
+  background: var(--surface-secondary);
+  border: 1px solid var(--surface-secondary);
+  border-radius: 10px;
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-sheet-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.mobile-btn-ghost {
+  flex: 1;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.mobile-btn-primary {
+  flex: 1;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mobile-btn-danger-icon {
+  background: var(--color-danger-subtle);
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-danger);
+}
+
+.mobile-event-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mobile-event-chip {
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mobile-event-chip-remove {
+  border: none;
+  background: none;
+  color: var(--accent-blue);
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.mobile-add-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px dashed var(--surface-secondary);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Event search dropdown inside sheet */
+.mobile-event-search-box {
+  background: var(--surface-secondary);
+  border-radius: 10px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.mobile-event-search-input {
+  width: 100%;
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--surface-tertiary);
+}
+
+.mobile-event-search-results {
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.mobile-event-search-item {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  border-bottom: 1px solid var(--surface-tertiary);
+}
+
+.mobile-event-search-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-event-search-item:active {
+  background: var(--accent-blue-subtle);
+}
+
+/* ── Calendar ─────────────────────────────────────────────── */
+.mobile-cal-month-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.4px;
+  padding: 0 20px 12px;
+}
+
+.mobile-cal-day-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 16px;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.mobile-cal-day-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  padding: 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mobile-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 16px;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.mobile-cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-cal-cell--today {
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.mobile-cal-cell--selected {
+  background: var(--accent-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.mobile-cal-cell--other-month {
+  color: var(--text-tertiary);
+}
+
+.mobile-cal-cell--has-event::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+}
+
+.mobile-cal-cell--today.mobile-cal-cell--has-event::after {
+  background: #fff;
+}
+
+/* Week strip */
+.mobile-week-strip {
+  display: flex;
+  padding: 10px 16px;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--surface-secondary);
+  margin-top: 8px;
+}
+
+.mobile-week-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-week-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 40px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-week-day__label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+}
+
+.mobile-week-day__num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.mobile-week-day__num--today {
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Day detail */
+.mobile-day-detail-header {
+  padding: 10px 20px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--surface-secondary);
+  margin-top: 2px;
+}
+
+/* Inspector cards */
+.mobile-inspector-card {
+  margin: 10px 16px;
+  background: var(--surface-primary);
+  border: 1px solid var(--surface-secondary);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.mobile-inspector-card__event-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mobile-event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.mobile-inspector-card__event-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.mobile-inspector-card__event-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.mobile-inspector-card__section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+
+.mobile-inspector-card__section-label:first-of-type {
+  margin-top: 0;
+}
+
+.mobile-inspector-task-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-top: 1px solid var(--surface-secondary);
+}
+
+.mobile-inspector-task-text {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.mobile-inspector-note-row {
+  padding: 7px 0;
+  border-top: 1px solid var(--surface-secondary);
+  cursor: pointer;
+}
+
+.mobile-inspector-note-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.mobile-inspector-note-preview {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.mobile-inspector-add-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  border-top: 1px solid var(--surface-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--accent-blue);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.mobile-inspector-card__edit-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: none;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Notes list ───────────────────────────────────────────── */
+.mobile-note-list-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--surface-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-note-list-item:active {
+  background: var(--surface-secondary);
+}
+
+.mobile-note-list-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-note-list-item__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-note-list-item__preview {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-note-list-item__chip {
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--chip-event-bg);
+  color: var(--chip-event-text);
+  border-radius: 5px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.mobile-note-delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-note-delete-btn:hover {
+  color: var(--color-danger);
+}
+
+/* ── Note editor header ───────────────────────────────────── */
+.mobile-editor-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.mobile-editor-toggle-btn {
+  padding: 4px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.mobile-editor-toggle-btn--active {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.mobile-editor-toggle-btn--inactive {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+/* ── Settings ─────────────────────────────────────────────── */
+.mobile-settings-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--surface-secondary);
+  padding: 0 4px;
+  background: var(--app-bg);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mobile-settings-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-settings-tab {
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: inherit;
+  color: var(--text-secondary);
+}
+
+.mobile-settings-tab--active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+
+.mobile-settings-section-heading {
+  padding: 16px 20px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.mobile-set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--surface-secondary);
+  gap: 12px;
+}
+
+.mobile-set-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.mobile-set-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.mobile-connected-badge {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mobile-settings-danger-zone {
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.mobile-btn-danger {
+  width: 100%;
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Account row in settings */
+.mobile-account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--surface-secondary);
+  gap: 12px;
+}
+
+.mobile-account-email {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-account-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mobile-sync-btn {
+  background: var(--accent-blue-subtle);
+  color: var(--accent-blue);
+  border: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.mobile-remove-btn {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+  border: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── Search input ─────────────────────────────────────────── */
+.mobile-search-input {
+  width: 100%;
+  background: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 150ms ease;
+}
+
+.mobile-search-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.mobile-search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ── Sheet button variants ────────────────────────────────── */
+.mobile-sheet-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.mobile-sheet-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.mobile-sheet-btn--ghost {
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+}
+
+.mobile-sheet-btn--primary {
+  background: var(--accent-blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Sheet text input */
+.mobile-sheet-text-input {
+  background: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text-primary);
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 150ms ease;
+  margin-bottom: 14px;
+}
+
+.mobile-sheet-text-input:focus {
+  border-color: var(--accent-blue);
+}
+
+/* Sheet row value text */
+.mobile-sheet-row__value {
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex: 1;
+  margin-left: 8px;
+  text-align: left;
+}
+
+/* Sheet delete button */
+.mobile-sheet-delete-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-danger);
+  padding: 4px 6px;
+  border-radius: 7px;
+  font-family: inherit;
+}
+
+.mobile-sheet-delete-btn:hover {
+  background: var(--color-danger-subtle);
+}
+
+/* ── Task row variants ────────────────────────────────────── */
+.mobile-task-row--overdue .mobile-task-row__text {
+  color: var(--color-danger);
+}
+
+.mobile-task-row--done {
+  opacity: 0.65;
+}
+
+.mobile-task-row__text--done {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.mobile-task-row__source {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+/* ── Inspector card extras ────────────────────────────────── */
+.mobile-inspector-card__event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.mobile-inspector-card__event-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.mobile-inspector-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 10px 0 4px;
+}
+
+/* ── Week day selected state ──────────────────────────────── */
+.mobile-week-day--active .mobile-week-day__num {
+  background: var(--accent-blue) !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* ── Calendar event dot (explicit element) ────────────────── */
+.mobile-cal-cell__dot {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+}
+
+.mobile-cal-cell--selected .mobile-cal-cell__dot {
+  background: #fff;
+}
+
+/* ── Calendar week ↔ month animated panels ────────────────── */
+/*
+ * Uses the grid-template-rows trick to animate height 0 → auto.
+ * Works in all modern browsers (iOS 16+, Chrome 88+).
+ */
+.mobile-cal-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.mobile-cal-panel--open {
+  grid-template-rows: 1fr;
+}
+
+/* Inner wrapper is required for the grid trick — must have min-height: 0 */
+.mobile-cal-panel__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Fade the panel contents in/out alongside height */
+.mobile-cal-panel .mobile-cal-grid,
+.mobile-cal-panel .mobile-week-strip,
+.mobile-cal-panel .mobile-cal-grid--header {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  transition-delay: 0ms;
+}
+
+.mobile-cal-panel--open .mobile-cal-grid,
+.mobile-cal-panel--open .mobile-week-strip,
+.mobile-cal-panel--open .mobile-cal-grid--header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 60ms; /* slight delay so height leads */
+}
+
+.mobile-cal-grid--header {
+  margin-bottom: 2px;
+  padding-top: 6px;
+}
+
+.mobile-cal-weekday-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  padding: 4px 0;
+}
+
+/* Week strip: remove the top margin so it doesn't push when collapsing */
+.mobile-cal-panel .mobile-week-strip {
+  margin-top: 0;
+  border-bottom: none;
+}
+
+/* The gesture container provides the single bottom border */
+.mobile-cal-gesture-area {
+  border-bottom: 1px solid var(--surface-secondary);
+  flex-shrink: 0;
+}
+
+/* ── Note editor header ───────────────────────────────────── */
+.mobile-note-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--surface-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.mobile-note-editor-title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Event chips row below the note editor header */
+.mobile-note-event-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--surface-secondary);
+  background: var(--app-bg);
+  flex-shrink: 0;
+}
+
+/* ── Note editor toolbar: single-row horizontally scrollable ── */
+/* Use !important + high-specificity selector to win over NoteEditor.css and MDXEditor's own injected styles */
+.mobile-content .note-editor .mdxeditor-toolbar,
+.mobile-content .note-editor [class*="_toolbar_"] {
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  /* Fade on both sides to signal scrollable content */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 20px,
+    black calc(100% - 20px),
+    transparent 100%
+  ) !important;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 20px,
+    black calc(100% - 20px),
+    transparent 100%
+  ) !important;
+}
+
+.mobile-content .note-editor .mdxeditor-toolbar::-webkit-scrollbar,
+.mobile-content .note-editor [class*="_toolbar_"]::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* ── Sheet date row ───────────────────────────────────────── */
+.mobile-sheet-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  background: var(--surface-secondary);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-sheet-date-row:active {
+  opacity: 0.8;
+}
+
+/* Clear button inside date row */
+.mobile-sheet-clear-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-sheet-clear-btn:hover {
+  color: var(--text-secondary);
+}
+
+/* Sheet title — prevent accidental text selection on tap */
+.mobile-sheet-title {
+  user-select: none;
+}
+
+/* ── Task edit sheet — event chips with remove ────────────── */
+.mobile-task-sheet-chip-remove {
+  background: none;
+  border: none;
+  margin-left: 4px;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.mobile-task-sheet-add-event {
+  background: none;
+  border: 1px dashed var(--text-tertiary);
+  color: var(--accent-blue);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── Task edit sheet — event search ────────────────────────── */
+.mobile-task-sheet-search-box {
+  margin-bottom: 10px;
+}
+
+.mobile-task-sheet-results {
+  max-height: 140px;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: var(--surface-secondary);
+  margin-bottom: 6px;
+}
+
+.mobile-task-sheet-result-row {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--surface-primary);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.mobile-task-sheet-result-row:last-child {
+  border-bottom: none;
+}
+
+.mobile-task-sheet-result-row:active {
+  background: var(--surface-primary);
+}
+
+.mobile-task-sheet-no-results {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.mobile-task-sheet-cancel-search {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  font-family: inherit;
+}
+
+/* ── Task edit sheet — event-relative timing ────────────────── */
+.mobile-task-sheet-relative {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.mobile-task-sheet-rel-event-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+/* Confirm state on delete button */
+.mobile-sheet-delete-btn--confirm {
+  color: var(--color-danger) !important;
+  background: var(--color-danger-subtle) !important;
+  border-radius: 7px;
+}
+
+/* ── Sheet slide-in / swipe-to-dismiss animations ─────────── */
+@keyframes sheet-slide-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes sheet-slide-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes overlay-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.mobile-sheet,
+html[data-mobile] .modal-panel {
+  will-change: transform;
+  animation: sheet-slide-in 320ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.mobile-sheet--dismissing,
+html[data-mobile] .modal-panel--dismissing {
+  pointer-events: none;
+}
+
+.mobile-sheet-overlay,
+html[data-mobile] .modal-backdrop {
+  animation: overlay-fade-in 200ms ease;
+}
+
+.mobile-sheet-overlay--dismissing,
+html[data-mobile] .modal-backdrop--dismissing {
+  animation: overlay-fade-out 280ms ease forwards;
+  pointer-events: none;
+}
+
+/* ── Event modal → bottom sheet on mobile ─────────────────── */
+/*
+ * Scoped to html[data-mobile] so desktop modals are unaffected.
+ * MobileLayout sets this attribute on <html> at mount.
+ */
+html[data-mobile] .modal-backdrop {
+  align-items: flex-end;
+  justify-content: stretch;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+html[data-mobile] .modal-panel {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 24px 24px 0 0;
+  box-shadow: none;
+  border-top: 1px solid var(--surface-secondary);
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+  min-height: 70vh;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Drag handle via pseudo-element */
+html[data-mobile] .modal-panel::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 4px;
+  background: var(--surface-tertiary);
+  border-radius: 2px;
+  margin: 0 auto 4px;
+  flex-shrink: 0;
+}
+
+/* Override fixed desktop width */
+html[data-mobile] .event-edit-modal {
+  width: 100%;
+}
+
+/* Push action buttons to bottom */
+html[data-mobile] .modal-actions {
+  margin-top: auto;
+  justify-content: stretch;
+  gap: 10px;
+}
+
+/* Full-width pill buttons matching sheet style */
+html[data-mobile] .modal-btn {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+html[data-mobile] .modal-btn--cancel {
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+}
+
+html[data-mobile] .modal-btn--submit {
+  font-weight: 600;
+}
+
+/* Inputs match sheet input style */
+html[data-mobile] .modal-input {
+  background: var(--surface-secondary);
+  border-color: transparent;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 15px;
+}
+
+html[data-mobile] .modal-input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: none;
+}

@@ -1223,6 +1223,11 @@
   text-overflow: ellipsis;
 }
 
+.metadata-picker-item--selected {
+  color: var(--accent-blue);
+  font-weight: 500;
+}
+
 .metadata-picker-item:hover,
 .metadata-picker-item:focus {
   background: var(--accent-blue-subtle);
