@@ -48,7 +48,7 @@ Miscellaneous UI improvements and bugfixes can be expected in early future.
 Major milestones planned for the project:
 
 - [ ] Mobile app
-  - [ ] iOS
+  - [x] iOS
   - [ ] Android
 - [ ] P2P sync between mobile apps and desktop apps
 - [ ] Documentation
